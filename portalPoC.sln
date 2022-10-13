@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portalPoC.mvc", "portalPoC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portalPoC.tests", "portalPoC.tests\portalPoC.tests.csproj", "{78F38731-4C43-4845-A1E4-5100E1346208}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portalPoC.lib", "portalPoC.lib\portalPoC.lib.csproj", "{4E2A36BC-BF98-4596-8633-66DC1AF4C1A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{78F38731-4C43-4845-A1E4-5100E1346208}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78F38731-4C43-4845-A1E4-5100E1346208}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78F38731-4C43-4845-A1E4-5100E1346208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E2A36BC-BF98-4596-8633-66DC1AF4C1A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2A36BC-BF98-4596-8633-66DC1AF4C1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E2A36BC-BF98-4596-8633-66DC1AF4C1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E2A36BC-BF98-4596-8633-66DC1AF4C1A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,8 +13,9 @@ namespace portalPoC.mvc.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View();
         }
 
@@ -28,5 +29,6 @@ namespace portalPoC.mvc.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

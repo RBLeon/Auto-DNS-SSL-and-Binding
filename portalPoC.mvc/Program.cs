@@ -1,7 +1,13 @@
+using portalPoC.lib;
+using portalPoC.mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<ITransipService, TransipService>();
+builder.Services.AddScoped<IDomainService, DomainService>();
 
 var app = builder.Build();
 
