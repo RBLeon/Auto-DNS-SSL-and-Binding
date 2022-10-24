@@ -1,6 +1,7 @@
 using Moq;
-using portalPoC.lib;
 using portalPoC.lib.Models;
+using portalPoC.lib.Services;
+using portalPoC.lib.Services.Interfaces;
 
 namespace portalPoC.tests
 {

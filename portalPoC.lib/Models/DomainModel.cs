@@ -5,7 +5,7 @@ namespace portalPoC.lib.Models
     public class DomainModel
     {
         [Required]
-        public string DomainName { get; set; }
+        public string? DomainName { get; set; }
     }
 
 
@@ -17,7 +17,7 @@ namespace portalPoC.lib.Models
     public class DnsEntry
     {
         [Required]
-        public string name { get; set; }
+        public string? name { get; set; }
         public int expire { get; set; }
         public string type { get; set; }
         public string content { get; set; }

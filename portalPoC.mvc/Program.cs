@@ -1,4 +1,5 @@
-using portalPoC.lib;
+using portalPoC.lib.Services;
+using portalPoC.lib.Services.Interfaces;
 using portalPoC.mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ITransipService, TransipService>();
 builder.Services.AddScoped<IDomainService, DomainService>();
+builder.Services.AddScoped<IBindingService, BindingService>();
+builder.Services.AddScoped<ILesslService, LesslService>();
+
 
 var app = builder.Build();
 

@@ -3,27 +3,22 @@ using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
 using portalPoC.lib.Models;
+using portalPoC.lib.Services.Interfaces;
 
-namespace portalPoC.lib
+namespace portalPoC.lib.Services
 {
     public class DnsEntryResult
     {
         public bool IsSuccess { get; set; }
         public string Message { get; set; }
-        public HttpStatusCode StatusCode{ get; set; }
-    }
-
-
-    public interface ITransipService
-    {
-        Task<DnsEntryResult> AddDnsEntryAsync(DomainModel bedrijfsnaam);
+        public HttpStatusCode StatusCode { get; set; }
     }
 
     public class TransipService : ITransipService
     {
         private readonly string _url = "https://api.transip.nl/v6/domains/auxil-portaal.nl/dns";
         private readonly string _stringIp = "127.0.0.1";
-        private readonly string _accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJhaCFkc0tJS3hiUm1tMGxDU2ZIIn0.eyJpc3MiOiJhcGkudHJhbnNpcC5ubCIsImF1ZCI6ImFwaS50cmFuc2lwLm5sIiwianRpIjoiMmFoIWRzS0lLeGJSbW0wbENTZkgiLCJpYXQiOjE2NjMzMjk3MjgsIm5iZiI6MTY2MzMyOTcyOCwiZXhwIjoxNjY1OTIxNzI4LCJjaWQiOiIyMDA2MjYyODUiLCJybyI6ZmFsc2UsImdrIjp0cnVlLCJrdiI6ZmFsc2V9.klQYwWvt6WRQC_Pso0gH4uPE9KDjj2f5SBHb5mp07Jf0NO8PgFYcaGnxr00SipPTTLTb91bCpygoBZaTCIgFG_bx1gqcPu4msgzyvH0eF-Gas673CWHVq5zHOod2MoX0s7u9zmrOQTLGj82YUB6l2t7AK0YeO_34-ivgpzheIEZNGu12v-neL0WriLzLXOjEQMXDE5N46lNjk5jUbYRsHGbgJwvCAaj1KsPHoRzOtDc47R06FbHoX313RSow8EFtNpVlYxkid7OsOlIKF0w9DmZzCfd6AvMchV3a2YpL8vxIlB9ODgj6-jjfk3ps1OUkw6VdtCKaMNp_sukSo1xUWw";
+        private readonly string _accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IkJybzdNJmI4R3RDJUNnV2dXOGF3In0.eyJpc3MiOiJhcGkudHJhbnNpcC5ubCIsImF1ZCI6ImFwaS50cmFuc2lwLm5sIiwianRpIjoiQnJvN00mYjhHdEMlQ2dXZ1c4YXciLCJpYXQiOjE2NjYzNjQyMjAsIm5iZiI6MTY2NjM2NDIyMCwiZXhwIjoxNjY5MDQ2MjIwLCJjaWQiOiIyMDA2MjYyODUiLCJybyI6ZmFsc2UsImdrIjp0cnVlLCJrdiI6ZmFsc2V9.nOYVasYL8roDo9OkPGr9s-Enc6tgE65fu-9iIITeMRNnEK6W-duRCSB9pyBQSLUNDHmlZAcQSWPLA0Gq52DtI371GbdXQQsSlx6GxOM6tDYHij9HA6Mrar_QTnicctlv_bZJ2Q-vgUfScgheaJLZothDk14Eyj3lHzyvpwRzjg1I7CbEUje1lFM8pKaXm0v_EjlO007utEk-yj1BiSC0DRBD8QvZYga9uAEmgyk3Vi8wiF2cqlxWeJVdzwOezJ0_5_T38j4DxzZMZk4jL5SJpphTBW226oi4ofbyxa2nuluFEgQMD4j1fovw80LYec42_B8vZmm1JTxOb7l4TuekjQ";
 
         public async Task<DnsEntryResult> AddDnsEntryAsync(DomainModel bedrijfsnaam)
         {

@@ -4,8 +4,9 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using portalPoC.lib;
 using portalPoC.lib.Models;
+using portalPoC.lib.Services;
+using portalPoC.lib.Services.Interfaces;
 using portalPoC.mvc.Models;
 
 namespace portalPoC.mvc.Controllers
