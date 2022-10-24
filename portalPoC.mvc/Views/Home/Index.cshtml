@@ -1,4 +1,5 @@
-﻿@model portalPoC.mvc.Models.DomainForm
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model portalPoC.lib.Models.DomainModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -9,7 +10,8 @@
     <div class="myform">
         <h1 class="display-4">Subdomain / IIS / SSL concept </h1>
         <p>Vul uw bedrijfsnaam in om automatisch een auxil-portaal.nl subdomein aan te maken, een SSL certificaat aan te vragen en beide met IIS aan het juiste adres te binden</p>
-        <form asp-action="" method="post" class="d-flex flex-column justify-content-center align-items-center">
+        @*@using()*@
+        <form asp-controller="Domain" asp-action="RegisterDomain" method="post" class="d-flex flex-column justify-content-center align-items-center">
             <div class="myforma">
                 <label asp-for="DomainName" class="form-label" >Bedrijfsnaam </label>
                 <input asp-for="DomainName" class="form-control" placeholder="Bijv. Dubio" />
@@ -19,7 +21,10 @@
                 <button type="submit" class="btn btn-dark">Aanvragen</button>
                 <p></p>
             </div>
-
+            @if (ViewBag.Message != null)
+            {
+                <h3>@ViewBag.Message</h3>
+            }
         </form>
     </div>
 </div>
