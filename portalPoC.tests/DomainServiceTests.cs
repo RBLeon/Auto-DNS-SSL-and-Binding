@@ -13,10 +13,12 @@ namespace portalPoC.tests
         public async Task DoesNotThrowOnException()
         {
             var TransipMock = new Mock<ITransipService>();
+            var LesslMock = new Mock<ILesslService>();
+            var BindingMock = new Mock<IBindingService>();
             TransipMock.Setup<DnsEntryResult>(m => m.AddDnsEntryAsync(It.Is<DomainModel>((d) => d == null)).Result)
                 .Throws(() => new ArgumentNullException("WHYYYYYY"));
 
-            var sut = new DomainService(TransipMock.Object);
+            var sut = new DomainService(TransipMock.Object, LesslMock.Object, BindingMock.Object);
 
             await sut.CreateDomainAsync(null);
         }
@@ -25,10 +27,12 @@ namespace portalPoC.tests
         public async Task ReturnsSuccessAsExpected()
         {
             var TransipMock = new Mock<ITransipService>();
+            var LesslMock = new Mock<ILesslService>();
+            var BindingMock = new Mock<IBindingService>();
             TransipMock.Setup<DnsEntryResult>(m => m.AddDnsEntryAsync(It.IsNotNull<DomainModel>()).Result)
                 .Returns(new DnsEntryResult { IsSuccess = true, Message = "test1" });
 
-            var sut = new DomainService(TransipMock.Object);
+            var sut = new DomainService(TransipMock.Object, LesslMock.Object, BindingMock.Object);
 
             var result = await sut.CreateDomainAsync(new DomainModel());
 
@@ -40,10 +44,12 @@ namespace portalPoC.tests
         public async Task ReturnsErrorAsExpected()
         {
             var TransipMock = new Mock<ITransipService>();
+            var LesslMock = new Mock<ILesslService>();
+            var BindingMock = new Mock<IBindingService>();
             TransipMock.Setup<DnsEntryResult>(m => m.AddDnsEntryAsync(It.IsNotNull<DomainModel>()).Result)
                 .Returns(new DnsEntryResult { IsSuccess = false, Message = "THIS IS KAPUT!" });
 
-            var sut = new DomainService(TransipMock.Object);
+            var sut = new DomainService(TransipMock.Object, LesslMock.Object, BindingMock.Object);
 
             var result = await sut.CreateDomainAsync(new DomainModel());
 
