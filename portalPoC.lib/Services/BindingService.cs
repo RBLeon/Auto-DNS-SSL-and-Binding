@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using portalPoC.lib.Models;
+﻿using portalPoC.lib.Models;
 using portalPoC.lib.Services.Interfaces;
-using System.Management.Automation;
 using Microsoft.Web.Administration;
 
 namespace portalPoC.lib.Services
@@ -20,12 +14,12 @@ namespace portalPoC.lib.Services
     public class BindingService : IBindingService
     {
         //attributes
-        private string? _bedrijfsnaam;
-        //private readonly string _command = "New-IISSiteBinding -Name \"portalPoC\" -BindingInformation \"*:80:" + _bedrijfsnaam + ".auxil-portaal.nl\" -Protocol http";
+        private string? _businessName;
+        //private readonly string _command = "New-IISSiteBinding -Name \"portalPoC\" -BindingInformation \"*:80:" + _businessName + ".auxil-portaal.nl\" -Protocol http";
 
-        public async Task<BindingCreationResult> AddBindingAsync(DomainModel bedrijfsnaam)
+        public async Task<BindingCreationResult> AddBindingAsync(DomainModel businessName)
         {
-            _bedrijfsnaam =  bedrijfsnaam.DomainName;
+            _businessName =  businessName.DomainName;
             //PowerShell ps = PowerShell.Create();
             //ps.AddCommand(_command);
 
@@ -38,32 +32,8 @@ namespace portalPoC.lib.Services
 
             try
             {
-                // heeft blijkbaar ook elevated rechten nodig, heb dit blijkbaar getest in powershell prompt run as admin
-
-                //PowerShell ps = PowerShell.Create();
-
-                //ps.AddCommand("New-IISSiteBinding")
-                //    .AddParameter("Name", "portalPoC")
-                //    .AddParameter("BindingInformation", "*:80:" + _bedrijfsnaam + ".auxil-portaal.nl")
-                //    .AddParameter("Protocol", "http")
-                //    .Invoke();
-
-                //    result.IsSuccess = true;
-                //    result.Message = "OK";
-
-
-                //proberen zonder powershell maar met microsoft.web.adminstration
-
-                //voorbeeld internet:
-                //using (ServerManager manager = new ServerManager())
-                //{
-                //    Site site = manager.Sites["portalPoC"];
-                //    site.Bindings.Clear();
-                //    site.Bindings.Add("*:80:", "http");
-
-                //    manager.CommitChanges();
-                //}
-                var bindName = "*:80:" + _bedrijfsnaam + ".auxil-portaal.nl";
+                // * 
+                var bindName = "*:80:" + _businessName + ".auxil-portaal.nl";
                 var server = new ServerManager();
                 var site = server.Sites.FirstOrDefault(a => a.Name == "portalPoC");
                 site.Bindings.Add(bindName, "http");
@@ -82,6 +52,35 @@ namespace portalPoC.lib.Services
     }
 }
 
+// * :
+// heeft blijkbaar ook elevated rechten nodig, heb dit blijkbaar getest in powershell prompt run as admin
+
+//PowerShell ps = PowerShell.Create();
+
+//ps.AddCommand("New-IISSiteBinding")
+//    .AddParameter("Name", "portalPoC")
+//    .AddParameter("BindingInformation", "*:80:" + _businessName + ".auxil-portaal.nl")
+//    .AddParameter("Protocol", "http")
+//    .Invoke();
+
+//    result.IsSuccess = true;
+//    result.Message = "OK";
+
+
+//proberen zonder powershell maar met microsoft.web.adminstration
+
+//voorbeeld internet:
+//using (ServerManager manager = new ServerManager())
+//{
+//    Site site = manager.Sites["portalPoC"];
+//    site.Bindings.Clear();
+//    site.Bindings.Add("*:80:", "http");
+
+//    manager.CommitChanges();
+//}
+
+
+// ** : 
 //public static bool AddBindings(IConfiguration configuration, ILogger logger, string subdomain)
 //{
 //    if (string.IsNullOrWhiteSpace(subdomain)) return false;

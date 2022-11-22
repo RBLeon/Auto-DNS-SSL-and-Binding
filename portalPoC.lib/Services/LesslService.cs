@@ -1,11 +1,7 @@
-﻿using portalPoC.lib.Models;
+﻿using Microsoft.Extensions.Options;
+using portalPoC.lib.Models;
 using portalPoC.lib.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace portalPoC.lib.Services
 {
@@ -19,9 +15,12 @@ namespace portalPoC.lib.Services
 
     public class LesslService : ILesslService
     {
-        //attributes
-
-        public async Task<SslCreationResult> AddSslAsync(DomainModel bedrijfsnaam)
+        private readonly DomainRegistrationSettings _domainRegistrationSettings;
+        public LesslService(IOptions<DomainRegistrationSettings> domainRegistrationSettings)
+        {
+            _domainRegistrationSettings = domainRegistrationSettings.Value;
+        }
+        public async Task<SslCreationResult> AddSslAsync(DomainModel businessName)
         {
 
             var result = new SslCreationResult()
@@ -30,7 +29,7 @@ namespace portalPoC.lib.Services
                 Message = ""
             };
             
-            string subdomainName = bedrijfsnaam.DomainName;
+            string subdomainName = businessName.DomainName;
 
             // Use ProcessStartInfo class
             ProcessStartInfo startInfo = new ProcessStartInfo
@@ -39,8 +38,9 @@ namespace portalPoC.lib.Services
                 UseShellExecute = true,
                 Verb = "runas",
                 //Werkt alleen geen admin rechten
-                FileName = "wacs.exe",
-                Arguments = "--source iis --host \"" + subdomainName + "\".auxil-portaal.nl --siteid 2 --transip-login auxilportaal --validation transip --transip-privatekeyfile C:\\localiis\\transip.key --installation iis"
+                FileName = _domainRegistrationSettings.wacsFileName,
+                //todo get parameters from appsettings.json
+                Arguments = "--source iis --host \"" + subdomainName + "\".\"" + _domainRegistrationSettings.mainDomain + "\" --siteid \"" + _domainRegistrationSettings.siteid + "\" --transip-login \"" + _domainRegistrationSettings.transipLogin + "\" --validation transip --transip-privatekeyfile \"" + _domainRegistrationSettings.transipPrivateKeyFile + "\" --installation iis"
             };
 
             try

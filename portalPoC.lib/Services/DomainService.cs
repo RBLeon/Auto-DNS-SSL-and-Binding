@@ -1,7 +1,6 @@
 ﻿using portalPoC.lib.Models;
 using portalPoC.lib.Services.Interfaces;
-using System.Configuration;
-using Microsoft.Web.Administration;
+using System.Configuration.Internal;
 
 namespace portalPoC.lib.Services
 {
@@ -26,7 +25,7 @@ namespace portalPoC.lib.Services
             _lesslService = lesslService;
             _bindingService = bindingService;
         }
-        public async Task<DomainCreationResult> CreateDomainAsync(DomainModel bedrijfsnaam)
+        public async Task<DomainCreationResult> CreateDomainAsync(DomainModel businessName)
         {
             var result = new DomainCreationResult()
             {
@@ -36,7 +35,7 @@ namespace portalPoC.lib.Services
 
             try
             {
-                var transipResult = await _transipService.AddDnsEntryAsync(bedrijfsnaam);
+                var transipResult = await _transipService.AddDnsEntryAsync(businessName);
                 result.IsSuccess = transipResult.IsSuccess;
 
                 if (transipResult.IsSuccess)
@@ -57,7 +56,7 @@ namespace portalPoC.lib.Services
 
             try
             {
-                var bindingResult = await _bindingService.AddBindingAsync(bedrijfsnaam);
+                var bindingResult = await _bindingService.AddBindingAsync(businessName);
                 result.IsSuccess = bindingResult.IsSuccess;
 
                 if (bindingResult.IsSuccess)
@@ -78,7 +77,7 @@ namespace portalPoC.lib.Services
 
             try
             {
-                var lesslResult = await _lesslService.AddSslAsync(bedrijfsnaam);
+                var lesslResult = await _lesslService.AddSslAsync(businessName);
                 result.IsSuccess = lesslResult.IsSuccess;
 
                 if (lesslResult.IsSuccess)
