@@ -24,11 +24,6 @@ namespace portalPoC.lib.Services
             _domainRegistrationSettings = domainRegistrationSettings.Value;
         }
 
-        //todo get values from appsettings.json
-        private readonly string _url = "https://api.transip.nl/v6/domains/auxil-portaal.nl/dns";
-        private readonly string _stringIp = "127.0.0.1";
-        private readonly string _accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6InlCYyNtZXdaVkh3RzdMZCZZUzllIn0.eyJpc3MiOiJhcGkudHJhbnNpcC5ubCIsImF1ZCI6ImFwaS50cmFuc2lwLm5sIiwianRpIjoieUJjI21ld1pWSHdHN0xkJllTOWUiLCJpYXQiOjE2Njg2Nzg0NjcsIm5iZiI6MTY2ODY3ODQ2NywiZXhwIjoxNjcxMjcwNDY3LCJjaWQiOiIyMDA2MjYyODUiLCJybyI6ZmFsc2UsImdrIjp0cnVlLCJrdiI6ZmFsc2V9.Y0b9KyWdy-gF30dX3_M1MbxAQmj6Z2MwK_gtOrRGOcDCZ31B4dALM9v2r27rwDVS4I3Pi95hS4qiM3GvhtTrR56-RCwIS4G07ZDFksuTVtccHtRg5JubqNxNgpawHKYIpxjEuRdIITNutkiywLE6XGXY7xW05Y518xqYFpVMD2F_jAwu3D7MddnDcyE_msxbMzn9xllW4mN2e657dtvs6oF3SUYiGrKtnCoJ2fHwHFi8embhleCbBmWM4WjWy83czOvjan_XLJsbshh6MNY7T-D0UKyxYOdPB7YA5ArtLJiJR4n5tCQHc88XJzRZQdhvLhG_eypgHegNkHGudrvW0w";
-
         public async Task<DnsEntryResult> AddDnsEntryAsync(DomainModel businessName)
         {
             var result = new DnsEntryResult()
