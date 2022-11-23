@@ -1,6 +1,7 @@
 ﻿using portalPoC.lib.Models;
 using portalPoC.lib.Services.Interfaces;
 using Microsoft.Web.Administration;
+using Microsoft.Extensions.Options;
 
 namespace portalPoC.lib.Services
 {
@@ -16,6 +17,12 @@ namespace portalPoC.lib.Services
         //attributes
         private string? _businessName;
         //private readonly string _command = "New-IISSiteBinding -Name \"portalPoC\" -BindingInformation \"*:80:" + _businessName + ".auxil-portaal.nl\" -Protocol http";
+
+        private readonly DomainRegistrationSettings _domainRegistrationSettings;
+        public BindingService(IOptions<DomainRegistrationSettings> domainRegistrationSettings)
+        {
+            _domainRegistrationSettings = domainRegistrationSettings.Value;
+        }
 
         public async Task<BindingCreationResult> AddBindingAsync(DomainModel businessName)
         {
@@ -33,9 +40,9 @@ namespace portalPoC.lib.Services
             try
             {
                 // * 
-                var bindName = "*:80:" + _businessName + ".auxil-portaal.nl";
+                var bindName = "*:80:" + _businessName + "." + _domainRegistrationSettings.mainDomain;
                 var server = new ServerManager();
-                var site = server.Sites.FirstOrDefault(a => a.Name == "portalPoC");
+                var site = server.Sites.FirstOrDefault(a => a.Name == _domainRegistrationSettings.iisSiteName);
                 site.Bindings.Add(bindName, "http");
                 server.CommitChanges();
                 result.IsSuccess = true;

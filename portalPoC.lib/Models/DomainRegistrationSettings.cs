@@ -8,6 +8,7 @@
         public string transipPrivateKeyFile { get; set; }
         public string transipLogin { get; set; }
         public string siteid { get; set; }
+        public string iisSiteName { get; set; }
         public string mainDomain { get; set; }
         public string wacsFileName { get; set; }
     }
