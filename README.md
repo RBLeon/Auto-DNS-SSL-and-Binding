@@ -1,4 +1,4 @@
-# Auto-DNS-SSL-and-Binding
+# Automatically create DNS A-record, SSL certificate and IIS Bindings
 A proof of concept for my internship. 
 Enter a business name and automatically generate a subdomain for this client, get a SSL certificate and create a http and https binding in IIS
 
