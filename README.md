@@ -9,9 +9,10 @@ Auto DNS/SSL/Binding:
 3. Create a new file named transip.key with the private transip key string in it formatted like: "-----BEGIN PRIVATE KEY-----x-----END PRIVATE KEY-----" and put this in the same folder as the site. i.e "C:\\localiis\\transip.key"
 4. Install win-acme plugin version from their site, add wacs.exe to your $PATH
 5. Download the win-acme transip plugin, and install this from https://www.win-acme.com/reference/plugins/validation/dns/transip
-6. Run wacs.exe once as administrator with standard settings (N), just so you can agree to their terms and enter your email address (otherwise the program can’t run in 		 unattended mode)
-7. Run Visual studio code as administrator, as win-acme needs admin rights (this will get replaced by a process with elevated rights in production)
-8. Go to appsettings.json in the API project, check the settings in the “DomainRegistrationSettings” section.
+6. Change the "PreValidateDnsRetryInterval" in the  settings_default.json in the win-acme folder to a desired interval (we use 5 seconds)
+7. Run wacs.exe once as administrator with standard settings (N), just so you can agree to their terms and enter your email address (otherwise the program can’t run in 		 unattended mode)
+8. Run Visual studio code as administrator, as win-acme needs admin rights (this will get replaced by a process with elevated rights in production)
+9. Go to appsettings.json in the API project, check the settings in the “DomainRegistrationSettings” section.
 	- url: The API url from your host of choice
 	- stringIp: the IP address you want to point the new DNS A-record to
 	- accessToken: the accesstoken requested by the Transip API
